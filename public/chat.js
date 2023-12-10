@@ -48,14 +48,14 @@ function displayMessage(messages, data, currentSocketId) {
   }
 
   const item = document.createElement("li");
-  const paragraph = document.createElement("p"); 
+  const paragraph = document.createElement("span"); 
 
   if (data.sender === currentSocketId) {
     item.classList.add("message-sender");
-    paragraph.classList.add('desc-sender');
+   
   } else {
     item.classList.add("message-receiver");
-    paragraph.classList.add('desc-receiver');
+    
   }
   const avatar = document.createElement("img");
   avatar.src = `/avatars/${data.userAvatar}`;

@@ -1,3 +1,4 @@
+const HOST = "103.167.88.241";
 const avatars = ["avatar1.jpg", "avatar2.png", "avatar4.png"]; // Danh sách các avatar
 
 const express = require("express");
@@ -17,13 +18,11 @@ app.get("/", (req, res) => {
 const io = new Server(server);
 
 io.on("connection", (socket) => {
-
   const userAvatar = avatars[Math.floor(Math.random() * avatars.length)];
 
   //chat
   socket.on("chat message", (msg) => {
-
-    io.emit("chat message", { msg, userAvatar, sender:socket.id });
+    io.emit("chat message", { msg, userAvatar, sender: socket.id });
   });
 
   //typing
@@ -37,11 +36,11 @@ io.on("connection", (socket) => {
   });
 
   //disconnect
-    socket.on("disconnect", () => {
+  socket.on("disconnect", () => {
     console.log("User disconnected");
   });
 });
 
 server.listen(3001, () => {
-  console.log("Server is running on http://localhost:3001");
+  console.log(`Server is running on http://localhost:3001`);
 });

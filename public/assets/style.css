@@ -13,9 +13,9 @@ form {
   display: flex;
   margin-bottom: 20px;
 }
-.header{
-    color: rgb(55, 194, 194);
-    text-align: center;
+.header {
+  color: rgb(55, 194, 194);
+  text-align: center;
 }
 
 input {
@@ -46,7 +46,7 @@ ul {
 }
 
 li {
-    display: flex;
+  display: flex;
   align-items: center;
   animation: fadeIn 0.5s ease-out;
 
@@ -64,19 +64,13 @@ li img {
 }
 
 .message-sender {
-  justify-content: flex-end;
-  text-align: right;
-    .desc-sender{
-        width: 100%;
-    }
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .message-receiver {
-  justify-content: flex-start;
-  text-align: left;
-    .desc-receiver{
-        width: 100%;
-    }
+  justify-content: flex-end;
+  text-align: right;
 }
 
 /* Animation cho tin nhắn mới */
@@ -90,7 +84,6 @@ li img {
     transform: translateY(0);
   }
 }
-
 
 /* Styling cho thông báo đang nhập */
 #typingIndicator {
