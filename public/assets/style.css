@@ -14,7 +14,7 @@ form {
   margin-bottom: 20px;
 }
 .header{
-    color: rgb(190, 222, 222);
+    color: rgb(55, 194, 194);
     text-align: center;
 }
 
@@ -46,10 +46,37 @@ ul {
 }
 
 li {
+    display: flex;
+  align-items: center;
+  animation: fadeIn 0.5s ease-out;
+
   margin-bottom: 10px;
   padding: 10px;
   background-color: #e9ecef;
   border-radius: 4px;
+}
+li img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%; /* Làm tròn ảnh */
+  margin-right: 10px;
+  object-fit: cover; /* Đảm bảo ảnh được hiển thị đúng cách */
+}
+
+.message-sender {
+  justify-content: flex-end;
+  text-align: right;
+    .desc-sender{
+        width: 100%;
+    }
+}
+
+.message-receiver {
+  justify-content: flex-start;
+  text-align: left;
+    .desc-receiver{
+        width: 100%;
+    }
 }
 
 /* Animation cho tin nhắn mới */
@@ -64,9 +91,6 @@ li {
   }
 }
 
-li {
-  animation: fadeIn 0.5s ease-out;
-}
 
 /* Styling cho thông báo đang nhập */
 #typingIndicator {

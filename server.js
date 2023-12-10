@@ -1,33 +1,43 @@
-const express = require('express');
+const avatars = ["avatar1.jpg", "avatar2.png", "avatar4.png"]; // Danh sách các avatar
+
+const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
-const path = require('path');
+const path = require("path");
 
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(express.static(path.join(__dirname,'public')))
-
-app.get('/', (req,res)=>{
-    res.sendFile(path.join(__dirname,'public', 'index.html')
-)});
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 const io = new Server(server);
 
 io.on("connection", (socket) => {
-    //lắng nghe từ client
-    socket.on("chat message", (msg)=>{
-        console.log("Message:" + msg);
 
-        //gửi tin nhắn đến all client khác
-        io.emit('chat message' , msg);
-    });
-     socket.on("typing", () => {
-       socket.broadcast.emit("typing", "Someone is typing...");
-     });
+  const userAvatar = avatars[Math.floor(Math.random() * avatars.length)];
 
-  socket.on("disconnect", () => {
+  //chat
+  socket.on("chat message", (msg) => {
+
+    io.emit("chat message", { msg, userAvatar, sender:socket.id });
+  });
+
+  //typing
+  socket.on("typing", () => {
+    socket.broadcast.emit("typing", "Someone is typing...");
+  });
+
+  //stop-typing
+  socket.on("stop-typing", () => {
+    socket.broadcast.emit("stop-typing", "");
+  });
+
+  //disconnect
+    socket.on("disconnect", () => {
     console.log("User disconnected");
   });
 });
@@ -35,6 +45,3 @@ io.on("connection", (socket) => {
 server.listen(3001, () => {
   console.log("Server is running on http://localhost:3001");
 });
-
-
-
